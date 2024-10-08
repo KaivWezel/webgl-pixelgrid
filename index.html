@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" type="image/svg+xml" href="/vite.svg" />
+		<link rel="stylesheet" href="./style.css" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Vite App</title>
+	</head>
+	<body>
+		<div class="input">
+			<h2>Upload your image or choose one from below</h2>
+			<div class="imageSelect">
+				<form action="">
+					<div>
+						<input type="radio" name="image" id="image1" value="/image1.jpg" />
+						<label for="image1">
+							<img src="/image1.jpg" alt="" width="200" height="200" />
+						</label>
+					</div>
+					<div>
+						<input type="radio" name="image" id="image2" value="/image2.jpg" />
+						<label for="image2">
+							<img src="/image2.jpg" alt="" width="200" height="200" />
+						</label>
+					</div>
+					<div>
+						<input type="radio" name="image" id="image3" value="/image3.jpg" />
+						<label for="image3">
+							<img src="/image3.jpg" alt="" width="200" height="200" />
+						</label>
+					</div>
+				</form>
+			</div>
+			<div>
+				<input type="file" name="imageUpload" id="imageUpload" accept="image/jpg, image/jpeg, image/png" />
+				<div class="imagePreview"></div>
+			</div>
+			<button class="startExperience">Start effect</button>
+		</div>
+		<button class="resetExperience">Reset experience</button>
+		<div class="webgl"></div>
+		<script type="module" src="/main.js" defer></script>
+	</body>
+</html>
