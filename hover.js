@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { Flowmap } from "./Flowmap.js";
+import { Flowmap } from "./flowmap.js";
 
 import { TextureLoader } from "three/src/loaders/TextureLoader.js";
 import vertexShader from "./shaders/image/vert.glsl";
