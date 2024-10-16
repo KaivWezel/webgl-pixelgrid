@@ -46,6 +46,7 @@ export default class GridHover {
 			size: 15,
 			dissipation: 0.945,
 			displacementStrength: 1.5,
+			radius: 0.1,
 		};
 
 		/**
@@ -110,6 +111,10 @@ export default class GridHover {
 				if (!e.last) return;
 				this.flowmap.updateParams(this.params);
 			});
+		folder.addBinding(this.params, "radius", { min: 0, max: 1, label: "Radius" }).on("change", (e) => {
+			if (!e.last) return;
+			this.flowmap.updateParams(this.params);
+		});
 	}
 
 	initGPGPU() {

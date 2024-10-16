@@ -3,6 +3,7 @@ uniform vec2 uPointer;
 uniform vec2 uVelocity;
 uniform float uDissipation;
 uniform float uDisplacementStrength;
+uniform float uRadius;
 
 void main()
 {
@@ -10,7 +11,7 @@ void main()
 
     vec4 color = texture(uGrid, uv - 0.011);
     float dist = distance(uPointer, uv);
-    dist =  1.0 - (smoothstep(0.0, 0.18, dist));
+    dist =  1.0 - (smoothstep(0.0, uRadius, dist));
 
     color.rg += uVelocity * dist * uDisplacementStrength;
     color.rg *= uDissipation;

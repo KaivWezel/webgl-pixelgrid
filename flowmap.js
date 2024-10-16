@@ -33,6 +33,7 @@ export class Flowmap {
 		this.gridVariable.material.uniforms.uVelocity = new THREE.Uniform(new THREE.Vector2(0, 0));
 		this.gridVariable.material.uniforms.uDissipation = new THREE.Uniform(this.params.dissipation);
 		this.gridVariable.material.uniforms.uDisplacementStrength = new THREE.Uniform(this.params.displacementStrength);
+		this.gridVariable.material.uniforms.uRadius = new THREE.Uniform(this.params.radius);
 		this.gridVariable.material.needsUpdate = true;
 
 		/**
@@ -45,18 +46,34 @@ export class Flowmap {
 	updateParams() {
 		this.gridVariable.material.uniforms.uDissipation.value = this.params.dissipation;
 		this.gridVariable.material.uniforms.uDisplacementStrength.value = this.params.displacementStrength;
+		this.gridVariable.material.uniforms.uRadius.value = this.params.radius;
 	}
 
 	updateMouse(uv) {
-		let velocity = this.gridVariable.material.uniforms.uPointer.value;
+		if (!this.lastTime) {
+			this.lastTime = window.performance.now();
+		}
+
+		if (!this.lastMouse) {
+			this.lastMouse = new THREE.Vector2(uv.x, uv.y);
+		}
+
+		let delta = window.performance.now() - this.lastTime;
+		delta = Math.max(delta, 16);
+		this.lastTime = window.performance.now();
+
+		const dx = uv.x - this.lastMouse.x;
+		const dy = uv.y - this.lastMouse.y;
+
+		this.lastMouse = new THREE.Vector2(uv.x, uv.y);
+
+		const velocity = new THREE.Vector2(dx / delta, dy / delta);
 
 		if (velocity.x === -1 && velocity.y === -1) {
 			velocity = uv;
 		}
 
-		velocity.subVectors(uv, velocity);
-
-		velocity.multiplyScalar(10);
+		velocity.multiplyScalar(80);
 		this.gridVariable.material.uniforms.uVelocity.value = velocity;
 		this.gridVariable.material.uniforms.uPointer.value = uv;
 	}
